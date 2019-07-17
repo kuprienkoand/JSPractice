@@ -42,6 +42,14 @@ let appData = {
 
     let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
         appData.addExpenses = addExpenses.toLowerCase().split(',');
+        let subResult;
+        let myArr = [];
+        for (let key in appData.addExpenses) {
+          subResult = appData.addExpenses[key].trim();
+          subResult = subResult.charAt(0).toUpperCase() + appData.addExpenses[key].slice(1);
+          myArr.push(subResult);
+        }
+    console.log(myArr);
         appData.deposit = confirm('Есть ли у вас депозит в банке?');
         for (let i = 0; i < 2; i++) {
           let myCount = function () {
@@ -51,13 +59,13 @@ let appData = {
             }
             while (isNaN(sum) || sum == '' || sum == null);
             return sum;
-          }
-
+          };
+          
           if (i === 0) {
             appData.expenses[prompt('Какие обязательные ежемесячные расходы у вас есть?', "Вода, электричество")] = myCount();
           } else if (i === 1) {
             appData.expenses[prompt('Какие обязательные ежемесячные расходы у вас есть?', "Газ, Продукты")] = myCount();
-          };
+          }
         }
   },
   getExpensesMonth: function() {
@@ -111,16 +119,17 @@ function getTargetMonth() {
   return appData.mission / appData.budgetMonth;
 }
 
-let str1 = appData.addExpenses,
+/* let str1 = appData.addExpenses,
   str = str1.join(", ");
 function firstAllLetter(str) {
   let massive = str.split(" ");
   for (let i = 0; i < massive.length; i++) {
-    let j = massive[i].charAt(0).toUpperCase();
+    let j = massive[i].trim().charAt(0).toUpperCase();
     massive[i] = j + massive[i].substr(1).toLowerCase();
   }
   return massive.join(" ");
-}
+} */
+
 
 /* for (let key in appData){
   console.log('Наша программа включает в себя данные: ' + key + ' - ' + appData[key]);
