@@ -41,15 +41,17 @@ let appData = {
     }
 
     let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
-        appData.addExpenses = addExpenses.toLowerCase().split(',');
-        let subResult;
+        appData.addExpenses = addExpenses.split(',');
+        let expResult;
         let myArr = [];
         for (let key in appData.addExpenses) {
-          subResult = appData.addExpenses[key].trim();
-          subResult = subResult.charAt(0).toUpperCase() + appData.addExpenses[key].slice(1);
-          myArr.push(subResult);
+          expResult = appData.addExpenses[key].trim();
+          expResult = expResult.charAt(0).toUpperCase() + expResult.slice(1);
+          myArr.push(expResult);
         }
-    console.log(myArr);
+        
+
+        appData.addExpenses = myArr;
         appData.deposit = confirm('Есть ли у вас депозит в банке?');
         for (let i = 0; i < 2; i++) {
           let myCount = function () {
@@ -147,7 +149,8 @@ console.log('Уровень дохода: ', appData.getStatusIncome());
 console.log('Будет ли цель достигнута? ', appData.queTargetMonth());
 console.log('Cрок достижения цели', Math.ceil(getTargetMonth()), 'месяцев');
 console.log('appData.addExpenses', appData.addExpenses);
-console.log(firstAllLetter(str));
+console.log('Обязательные расходы: ', appData.addExpenses.join(', '));
+/* console.log(firstAllLetter(str)); */
 
 
 /* appData.getInfoDeposit();
